@@ -55,17 +55,25 @@ let currentCity = '';
 let isCelsius = true;
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 const gifCache = {};
+let apiCalls = 0;
 
 // ==============================================
 // FUNZIONI GIPHY
 // ==============================================
 async function fetchGiphyGif(weatherCode) {
+    apiCalls++;
+    updateApiCounter(); // Aggiungi questa linea
+    
+    if (apiCalls > 95) {
+        showAlert('Attenzione: stai per raggiungere il limite di chiamate GIPHY (100/giorno)');
+    }
+
     if (gifCache[weatherCode]) return gifCache[weatherCode];
     
     try {
         const response = await fetch(
             `${GIPHY_API_URL}?q=${WEATHER_TO_GIPHY[weatherCode]}` +
-            `&api_key=${GIPHY_API_KEY}&limit=1&rating=g&bundle=messaging_non_clips`
+            `&api_key=${GIPHY_API_KEY}&limit=1&rating=g`
         );
         
         const { data } = await response.json();
@@ -75,8 +83,41 @@ async function fetchGiphyGif(weatherCode) {
         return gifUrl;
     } catch (error) {
         console.error('Errore GIPHY:', error);
-        return DEFAULT_GIFS[weatherCode] || 'https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif';
+        return DEFAULT_GIFS[weatherCode];
     }
+}
+
+// Aggiungi queste nuove funzioni
+function updateApiCounter() {
+    const counterElement = document.getElementById('api-counter');
+    const progressFill = document.querySelector('.progress-fill');
+    
+    counterElement.textContent = apiCalls;
+    progressFill.style.width = `${Math.min(apiCalls, 100)}%`;
+    
+    if (apiCalls > 80) {
+        progressFill.style.background = 'linear-gradient(90deg, #ff9a00, #ff0000)';
+    }
+}
+
+function showAlert(message) {
+    const alert = document.createElement('div');
+    alert.className = 'api-alert';
+    alert.innerHTML = `
+        <span>⚠️ ${message}</span>
+        <button class="close-alert">&times;</button>
+    `;
+    
+    document.body.appendChild(alert);
+    
+    setTimeout(() => {
+        alert.classList.add('show');
+    }, 100);
+    
+    alert.querySelector('.close-alert').addEventListener('click', () => {
+        alert.classList.remove('show');
+        setTimeout(() => alert.remove(), 300);
+    });
 }
 
 function warmupGifCache() {
