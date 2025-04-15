@@ -1,0 +1,296 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --text-color: #333;
+    --bg-color: #f8f9fa;
+    --card-color: #fff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Tema Notturno */
+.dark-mode {
+    --primary-color: #7209b7;
+    --secondary-color: #560bad;
+    --text-color: #f8f9fa;
+    --bg-color: #212529;
+    --card-color: #343a40;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: var(--transition);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-box input {
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 50px;
+    font-size: 1rem;
+    width: 70%;
+    max-width: 400px;
+    transition: var(--transition);
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.search-box button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-box button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+.weather-card {
+    background-color: var(--card-color);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+    transition: var(--transition);
+}
+
+.weather-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.weather-header h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+#current-date {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.weather-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.temperature {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#weather-icon {
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+}
+
+#temp-value {
+    font-size: 3.5rem;
+    font-weight: 600;
+}
+
+#temp-unit {
+    font-size: 2rem;
+    margin-left: 5px;
+    color: var(--primary-color);
+}
+
+.weather-details {
+    width: 100%;
+}
+
+#weather-description {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.detail-item {
+    background-color: rgba(67, 97, 238, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detail-item i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.favorites {
+    background-color: var(--card-color);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.favorites h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#favorites-list {
+    list-style: none;
+}
+
+#favorites-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#favorites-list li:last-child {
+    border-bottom: none;
+}
+
+#favorites-list button {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+#theme-toggle {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: var(--transition);
+}
+
+#theme-toggle:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .temperature {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    #weather-icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* Aggiungi queste regole alla fine del file */
+
+/* Stili per le GIF meteo */
+#weather-icon {
+    width: 120px;
+    height: 120px;
+    margin-right: 15px;
+    border-radius: 15px;
+    object-fit: cover;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Animazione per le GIF quando cambia il meteo */
+.weather-icon-transition {
+    animation: weatherChange 0.5s ease-in-out;
+}
+
+@keyframes weatherChange {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Stile per le condizioni meteo estreme */
+.thunder #weather-icon {
+    box-shadow: 0 0 15px #ffeb3b;
+}
+
+.rain #weather-icon {
+    box-shadow: 0 0 15px #2196f3;
+}
+
+.snow #weather-icon {
+    box-shadow: 0 0 15px #b3e5fc;
+}
